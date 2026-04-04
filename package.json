@@ -11,22 +11,36 @@
     "dist": "electron-builder",
     "dist:win": "electron-builder --win",
     "dist:linux": "electron-builder --linux",
-    "dist:all": "electron-builder --win --linux",
+    "dist:mac": "electron-builder --mac",
+    "dist:all": "electron-builder --win --linux --mac",
     "dist:win:nsis": "electron-builder --win nsis",
     "dist:win:portable": "electron-builder --win portable",
-    "dist:linux:appimage": "electron-builder --linux AppImage"
+    "dist:win:msi": "electron-builder --win msi",
+    "dist:linux:appimage": "electron-builder --linux AppImage",
+    "dist:linux:deb": "electron-builder --linux deb",
+    "dist:linux:rpm": "electron-builder --linux rpm",
+    "dist:linux:snap": "electron-builder --linux snap",
+    "dist:mac:dmg": "electron-builder --mac dmg",
+    "dist:mac:zip": "electron-builder --mac zip",
+    "dist:all:portable": "electron-builder --win portable --linux AppImage",
+    "dist:all:ci": "node -e \"const {execSync}=require('child_process');const os=require('os');const plat=os.platform();if(plat==='win32'){execSync('npm run dist:win',{stdio:'inherit'});}else if(plat==='darwin'){execSync('npm run dist:mac',{stdio:'inherit'});}else if(plat==='linux'){execSync('npm run dist:linux',{stdio:'inherit'});}console.log('Built for:',plat);\""
   },
-  "keywords": ["notes", "markdown", "obsidian", "vault"],
+  "keywords": [
+    "notes",
+    "markdown",
+    "obsidian",
+    "vault"
+  ],
   "author": "Cangry Team",
   "license": "MIT",
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.2.0",
     "electron": "^28.0.0",
-    "electron-builder": "^24.9.0",
+    "electron-builder": "^24.13.3",
     "typescript": "^5.3.0",
-    "vite": "^5.0.0",
-    "@vitejs/plugin-react": "^4.2.0"
+    "vite": "^5.0.0"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -37,25 +51,39 @@
     "productName": "Cangry Vault",
     "copyright": "Copyright © 2024 Cangry Team",
     "directories": {
-      "output": "release"
+      "output": "release",
+      "buildResources": "build"
     },
     "files": [
       "dist/**/*",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      "!**/*.map"
+    ],
+    "extraResources": [
+      {
+        "from": "plugins",
+        "to": "plugins",
+        "filter": ["**/*"]
+      }
     ],
     "win": {
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64"]
+          "arch": ["x64", "arm64"]
         },
         {
           "target": "portable",
           "arch": ["x64"]
+        },
+        {
+          "target": "msi",
+          "arch": ["x64"]
         }
       ],
       "icon": "build/icon.ico",
-      "artifactName": "${productName}-${version}-${arch}.${ext}"
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "requestedExecutionLevel": "asInvoker"
     },
     "nsis": {
       "oneClick": false,
@@ -67,28 +95,87 @@
       "installerIcon": "build/icon.ico",
       "uninstallerIcon": "build/icon.ico",
       "installerHeaderIcon": "build/icon.ico",
-      "license": "LICENSE"
+      "license": "LICENSE",
+      "include": "build/installer.nsh"
     },
     "portable": {
-      "artifactName": "${productName}-${version}-portable.exe"
+      "artifactName": "${productName}-${version}-portable.${ext}"
     },
     "linux": {
       "target": [
         {
           "target": "AppImage",
-          "arch": ["x64"]
+          "arch": ["x64", "arm64"]
         },
         {
           "target": "deb",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "rpm",
+          "arch": ["x64"]
+        },
+        {
+          "target": "snap",
           "arch": ["x64"]
         }
       ],
       "icon": "build/icon.png",
       "category": "Utility",
-      "artifactName": "${productName}-${version}-${arch}.${ext}"
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "desktop": {
+        "Name": "Cangry Vault",
+        "Comment": "A powerful note-taking application",
+        "Categories": "Utility;TextEditor;"
+      }
     },
     "appImage": {
-      "artifactName": "${productName}-${version}.AppImage"
+      "artifactName": "${productName}-${version}-${arch}.AppImage"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64", "universal"]
+        },
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64", "universal"]
+        }
+      ],
+      "icon": "build/icon.icns",
+      "category": "public.app-category.productivity",
+      "darkModeSupport": true,
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "dmg": {
+      "sign": false,
+      "title": "${productName} ${version}",
+      "icon": "build/icon.icns",
+      "background": "build/dmg-background.png",
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "snap": {
+      "summary": "A powerful note-taking application similar to Obsidian",
+      "description": "Cangry Vault is a markdown-based note-taking application with wiki-links, graph view, and plugin support.",
+      "grade": "stable",
+      "confinement": "strict",
+      "base": "core22"
     }
   }
 }

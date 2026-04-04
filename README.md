@@ -1,142 +1,205 @@
 # Cangry Vault
 
-A powerful note-taking application similar to Obsidian, built with Electron and React.
+Мощное приложение для заметок, похожее на Obsidian, созданное на Electron и React.
 
-![Version](https://img.shields.io/badge/version-0.0.1-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Версия](https://img.shields.io/badge/version-1.0.0-blue)
+![Лицензия](https://img.shields.io/badge/license-MIT-green)
+![Платформы](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
 
-## Features
+## Возможности
 
-- **Markdown Editing** - Write notes in plain text markdown format
-- **File-based Storage** - All notes are stored as regular `.md` files
-- **Wiki Links** - Link between notes using `[[wiki-link]]` syntax
-- **Vault Management** - Organize notes in folders (vaults)
-- **Quick Switcher** - Fast file navigation with `Ctrl+O`
-- **Command Palette** - Access all commands with `Ctrl+P`
-- **Clone Vault** - Duplicate your entire vault to another location
-- **Dark Theme** - Beautiful Obsidian-like dark theme
-- **Cross-platform** - Works on Windows, Linux, and macOS
+- **Редактирование Markdown** — Пишите заметки в формате plain text markdown
+- **Файловое хранилище** — Все заметки хранятся как обычные `.md` файлы
+- **Wiki-ссылки** — Связывайте заметки с помощью синтаксиса `[[wiki-link]]`
+- **Граф связей** — Визуализация связей между заметками
+- **Управление хранилищами** — Организуйте заметки в папках (хранилищах)
+- **Быстрый переключатель** — Быстрая навигация по файлам через `Ctrl+O`
+- **Палитра команд** — Доступ ко всем командам через `Ctrl+P`
+- **Клонирование хранилища** — Дублируйте всё хранилище в другое место
+- **Граф связей** — Force-directed граф wiki-ссылок
+- **Обратные ссылки** — Автоматический поиск обратных ссылок
+- **Теги** — Автоматическое извлечение и поиск тегов
+- **Разделённый вид** — Редактирование + предпросмотр одновременно
+- **Система плагинов** — Расширяемость через manifest.json
+- **Тёмная тема** — Красивая тёмная тема в стиле Obsidian
+- **Кроссплатформенность** — Работает на Windows, Linux и macOS
 
-## Screenshots
+## Скриншоты
 
-The application features a clean, minimal interface with:
-- Sidebar with file tree and search
-- Tabbed editing for multiple files
-- Split view (edit + preview)
-- Status bar with word count
+Приложение имеет чистый минималистичный интерфейс с:
+- Боковой панелью с деревом файлов и поиском
+- Вкладками для редактирования нескольких файлов
+- Разделённым видом (редактирование + предпросмотр)
+- Строкой состояния с подсчётом слов
 
-## Installation
+## Установка
 
-### Download Pre-built Binaries
+### Скачать готовые сборки
 
-- **Windows**: Download the NSIS installer or portable executable from [Releases](https://github.com/yourusername/cangry-vault/releases)
-- **Linux**: Download the AppImage or .deb package from [Releases](https://github.com/yourusername/cangry-vault/releases)
+- **Windows**: Скачайте NSIS-установщик или портативную версию со страницы [Releases](https://github.com/yourusername/cangry-vault/releases)
+- **Linux**: Скачайте AppImage или .deb пакет со страницы [Releases](https://github.com/yourusername/cangry-vault/releases)
 
-### Build from Source
+### Сборка из исходников
 
 ```bash
-# Clone the repository
+# Клонируйте репозиторий
 git clone https://github.com/yourusername/cangry-vault.git
 cd cangry-vault
 
-# Install dependencies
+# Установите зависимости
 npm install
 
-# Run in development mode
+# Запуск в режиме разработки
 npm run dev
 
-# Build for production
+# Сборка для продакшена
 npm run build
 
-# Create distributable packages
-npm run dist:win      # Windows (NSIS installer + portable)
+# Создание дистрибутивов
+npm run dist:win      # Windows (NSIS-установщик + портативная)
 npm run dist:linux    # Linux (AppImage + deb)
-npm run dist:all      # All platforms
+npm run dist:all      # Все платформы
 ```
 
-## Keyboard Shortcuts
+## Горячие клавиши
 
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+N` | New note |
-| `Ctrl+S` | Save file |
-| `Ctrl+O` | Quick switcher |
-| `Ctrl+P` | Command palette |
-| `Ctrl+\` | Toggle sidebar |
-| `Escape` | Close modal |
+| Комбинация | Действие |
+|------------|----------|
+| `Ctrl+N` | Новая заметка |
+| `Ctrl+S` | Сохранить файл |
+| `Ctrl+O` | Быстрый переключатель |
+| `Ctrl+P` | Палитра команд |
+| `Ctrl+B` | Переключить левую панель |
+| `Ctrl+→` | Переключить правую панель |
+| `Ctrl+,` | Настройки |
+| `Ctrl+E` | Режим редактирования |
+| `Ctrl+R` | Режим предпросмотра |
+| `Ctrl+Shift+E` | Разделённый режим |
+| `Ctrl+W` | Закрыть вкладку |
+| `Ctrl+F4` | Закрыть все вкладки |
+| `Escape` | Закрыть модальное окно |
 
-## Markdown Syntax
+## Синтаксис Markdown
 
-Cangry Vault supports standard markdown:
+Cangry Vault поддерживает стандартный markdown:
 
 ```markdown
-# Heading 1
-## Heading 2
-### Heading 3
+# Заголовок 1
+## Заголовок 2
+### Заголовок 3
 
-**bold text**
-*italic text*
-***bold italic***
+**жирный текст**
+*курсив*
+***жирный курсив***
 
-`inline code`
+`встроенный код`
 
-[[wiki-link]] - links to another note
+[[wiki-ссылка]] — ссылка на другую заметку
 
-- [ ] task item
-- [x] completed task
+- [ ] задача
+- [x] выполненная задача
 
-> blockquote
+> цитата
 
---- horizontal rule
+--- горизонтальная линия
 ```
 
-## Project Structure
+## Структура проекта
 
 ```
 cangry-vault/
 ├── src/
 │   ├── main/
-│   │   ├── main.ts       # Electron main process
-│   │   └── preload.ts    # Preload script (context bridge)
+│   │   ├── main.ts       # Главный процесс Electron
+│   │   ├── preload.ts    # Preload-скрипт (context bridge)
+│   │   ├── clone.ts      # Модуль клонирования хранилищ
+│   │   ├── native.ts     # Fallback для нативных модулей
+│   │   └── plugins.ts    # Загрузчик плагинов
+│   ├── native/
+│   │   ├── addon.cpp     # C++ нативный модуль
+│   │   ├── copy.cpp/h    # Копирование файлов
+│   │   ├── checksum.cpp/h # SHA256 хеширование
+│   │   └── search.cpp/h  # Полнотекстовый поиск
 │   └── renderer/
-│       ├── App.tsx        # Main React component
-│       ├── index.tsx      # Entry point
+│       ├── App.tsx        # Главный React-компонент
+│       ├── index.tsx      # Точка входа
 │       ├── types/
-│       │   └── api.ts     # TypeScript types
+│       │   └── api.ts     # TypeScript типы
 │       └── styles/
-│           └── global.css # All styles
-├── dist/                  # Built files
-├── release/               # Distributable packages
+│           └── global.css # Все стили
+├── build/
+│   ├── icon.ico           # Иконка Windows
+│   ├── icon.png           # Иконка Linux
+│   ├── icon.icns          # Иконка macOS
+│   ├── installer.nsh      # NSIS скрипта
+│   ├── entitlements.mac.plist # macOS entitlements
+│   └── convert-icons.bat  # Скрипт конвертации иконок
+├── dist/                  # Собранные файлы
+├── release/               # Дистрибутивы
 ├── package.json
+├── BUILD.md               # Подробная инструкция по сборке
 ├── tsconfig.main.json
-└── vite.config.mjs
+└── vite.config.ts
 ```
 
-## Development
+## Разработка
 
-### Requirements
+### Требования
 
 - Node.js 18+
-- npm or yarn
+- npm 9+
 
-### For Windows builds:
-- NSIS installer requires Windows or Wine
-- Portable build works everywhere
+### Быстрый старт
 
-### For Linux builds:
-- AppImage requires Linux environment
-- deb package for Debian/Ubuntu
+```bash
+# Установка зависимостей
+npm install
 
-## License
+# Запуск в режиме разработки
+npm run dev
 
-MIT License - see [LICENSE](LICENSE) for details.
+# Сборка
+npm run build
+```
 
-## Contributing
+## Сборка для всех платформ
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Подробные инструкции по сборке для Windows, macOS и Linux см. в файле [BUILD.md](BUILD.md).
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+### Краткая инструкция
+
+```bash
+# Windows (NSIS установщик + Portable)
+npm run dist:win
+
+# macOS (DMG + ZIP)
+npm run dist:mac
+
+# Linux (AppImage + DEB + RPM + Snap)
+npm run dist:linux
+
+# Все платформы сразу
+npm run dist:all
+```
+
+### Форматы дистрибутивов
+
+| Платформа | Форматы | Описание |
+|-----------|---------|----------|
+| Windows | NSIS, MSI, Portable | Установщик, MSI пакет, портативная версия |
+| macOS | DMG, ZIP | DMG образ, ZIP архив (Intel, Apple Silicon, Universal) |
+| Linux | AppImage, DEB, RPM, Snap | Универсальный, Ubuntu/Debian, Fedora, Snap Store |
+
+## Лицензия
+
+MIT License — подробности в файле [LICENSE](LICENSE).
+
+## Участие в разработке
+
+Вклад приветствуется! Не стесняйтесь создавать Pull Request.
+
+1. Форкните репозиторий
+2. Создайте ветку с функцией (`git checkout -b feature/новая-функция`)
+3. Зафиксируйте изменения (`git commit -m 'Добавить новую функцию'`)
+4. Отправьте в репозиторий (`git push origin feature/новая-функция`)
+5. Откройте Pull Request
