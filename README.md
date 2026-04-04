@@ -2,7 +2,7 @@
 
 Мощное приложение для заметок, похожее на Obsidian, созданное на Electron и React.
 
-![Версия](https://img.shields.io/badge/version-1.0.0-blue)
+![Версия](https://img.shields.io/badge/version-0.0.1-blue)
 ![Лицензия](https://img.shields.io/badge/license-MIT-green)
 ![Платформы](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
 
