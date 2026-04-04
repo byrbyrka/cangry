@@ -1,6 +1,6 @@
 # Cangry Vault
 
-Мощное приложение для заметок, похожее на Obsidian, созданное на Electron и React.
+Созданно на Electron и React.
 
 ![Версия](https://img.shields.io/badge/version-0.0.1-blue)
 ![Лицензия](https://img.shields.io/badge/license-MIT-green)
